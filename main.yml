@@ -1,0 +1,26 @@
+---
+- hosts: http
+  become: true
+  roles:
+    - name: users
+      vars:
+        users:
+          - name: skillfactory
+            ssh_key: ~/.ssh/id_rsa.pub
+    - name: http
+      vars:
+        target_port: 80
+        fastcgi_pass: "{{ hostvars.php.ansible_host }}:{{ hostvars.php.php_listen }}"
+
+- hosts: php
+  become: true
+  roles:
+    - name: users
+      vars:
+        users:
+          - name: skillfactory
+            ssh_key: ~/.ssh/id_rsa.pub
+
+    - name: php
+      vars:
+        php_listen: 9000

@@ -1,0 +1,4 @@
+---
+target_port: 80
+root_path: /var/www/html
+fastcgi_pass: unix:/var/run/php/php8.2-fpm.sock

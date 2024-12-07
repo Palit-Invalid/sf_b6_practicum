@@ -1,0 +1,20 @@
+---
+- name: Installing php-fpm
+  apt:
+    name: php-fpm
+    state: present
+    update_cache: true
+  notify: restart php-fpm
+
+- name: Setting port
+  lineinfile:
+    path: /etc/php/8.2/fpm/pool.d/www.conf
+    regexp: "^listen ="
+    line: listen = {{ php_listen }}
+  notify: restart php-fpm
+
+- name: Creating root directory
+  file:
+    path: "{{ root_path }}"
+    state: directory
+    mode: 0755

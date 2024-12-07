@@ -1,0 +1,4 @@
+---
+- name: Creating users
+  include_tasks: user.yml
+  loop: "{{ users }} "

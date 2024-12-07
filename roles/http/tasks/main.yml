@@ -1,0 +1,25 @@
+---
+- name: Installing nginx
+  apt:
+    name: nginx
+    state: present
+    update_cache: true
+  notify: restart nginx
+
+- name: Disabling default site
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
+- name: Copying nginx config
+  template:
+    src: site.conf.j2
+    dest: /etc/nginx/sites-available/site.conf
+    mode: 0644
+
+- name: Enabling site
+  file:
+    src: /etc/nginx/sites-available/site.conf
+    dest: /etc/nginx/sites-enabled/site.conf
+    state: link
+  notify: restart nginx

@@ -1,0 +1,4 @@
+---
+users:
+  - name: user1
+    ssh_key: id_rsa.pub

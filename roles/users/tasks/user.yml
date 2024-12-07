@@ -1,0 +1,12 @@
+---
+- name: Create user {{ item.name }}
+  user:
+    name: "{{ item.name }}"
+    password_lock: true
+    shell: /bin/bash
+
+- name: Importing SSH-pubkey
+  ansible.posix.authorized_key:
+    user: "{{ item.name }}"
+    state: present
+    key: "{{ lookup('file', item.ssh_key) }}"

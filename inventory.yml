@@ -1,0 +1,13 @@
+linux:
+  hosts:
+    http:
+      ansible_host: 10.0.8.10
+
+    php:
+      ansible_host: 10.0.8.11
+      php_listen: 9000
+
+  vars:
+    ansible_user: cloud-user
+    ansible_connection: ssh
+    ansible_python_interpreter: /usr/bin/python3
